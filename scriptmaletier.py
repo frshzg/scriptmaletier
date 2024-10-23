@@ -14,7 +14,7 @@ chrome_options.add_argument('--disable-dev-shm-usage')
 print("Initialisation du driver Chrome...")
 
 # Initialiser le WebDriver pour Chrome
-driver = webdriver.Chrome(service=Service("/usr/local/bin/chromedriver"), options=chrome_options)
+driver = webdriver.Chrome(options=chrome_options)
 
 # URL de la page produit
 url = 'https://www.lesmalleiters.com/fr/chanel/petite-maroquinerie/chanel-wallet-on-chain-chanel-19-rose'
