@@ -26,14 +26,17 @@ wait = WebDriverWait(driver, 10)
 
 try:
     # Extraire le nom du sac
+    print("Extraction du nom du sac...")
     nom_sac = wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, 'p.keepEditorStyle'))).text
     print(f"Nom du sac: {nom_sac}")
     
     # Extraire le prix
+    print("Extraction du prix...")
     prix = driver.find_element(By.CSS_SELECTOR, 'span.price').text
     print(f"Prix: {prix}")
 
     # Extraire la description
+    print("Extraction de la description...")
     description = driver.find_element(By.CSS_SELECTOR, 'div.p-description').text
     print(f"Description: {description}")
 
