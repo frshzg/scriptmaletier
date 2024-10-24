@@ -6,9 +6,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import os
 
-# Utiliser le chemin ChromeDriver fourni par le buildpack Chrome for Testing
+# Chemin vers ChromeDriver et Chrome installés via le buildpack
 chrome_driver_path = "/app/.chromedriver/bin/chromedriver"
-chrome_binary_path = "/app/.apt/usr/bin/google-chrome"
+chrome_binary_path = "/app/.apt/usr/bin/google-chrome-stable"
 
 # Configurer les options Chrome pour Heroku
 chrome_options = Options()
