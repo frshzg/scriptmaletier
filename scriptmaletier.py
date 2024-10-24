@@ -6,16 +6,18 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import os
 
-# Configurer les options Chrome
+# Utiliser le chemin ChromeDriver fourni par le buildpack Chrome for Testing
+chrome_driver_path = "/app/.chromedriver/bin/chromedriver"
+chrome_binary_path = "/app/.apt/usr/bin/google-chrome"
+
+# Configurer les options Chrome pour Heroku
 chrome_options = Options()
+chrome_options.binary_location = chrome_binary_path
 chrome_options.add_argument('--headless')  # Mode sans interface graphique
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 
-# Chemin vers ChromeDriver (déployé par le buildpack)
-chrome_driver_path = "/app/.chromedriver/bin/chromedriver"  # Assurez-vous que c'est le bon chemin
-
-# Initialisation du driver Chrome avec le bon service
+# Initialisation du driver Chrome
 print("Initialisation du driver Chrome...")
 service = Service(executable_path=chrome_driver_path)
 driver = webdriver.Chrome(service=service, options=chrome_options)
