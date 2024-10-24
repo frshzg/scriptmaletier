@@ -1,3 +1,5 @@
+import socks
+import socket
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
@@ -5,9 +7,13 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+# Configurer PySocks pour utiliser le proxy SOCKS4
+socks.set_default_proxy(socks.SOCKS4, "162.19.7.48", 60113)
+socket.socket = socks.socksocket  # Redirige toutes les connexions via le proxy
+
 # Configurer Chrome pour le mode headless
 chrome_options = Options()
-chrome_options.add_argument('--headless')
+chrome_options.add_argument('--headless')  # Mode sans interface graphique (optionnel)
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 
