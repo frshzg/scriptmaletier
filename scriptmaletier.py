@@ -1,26 +1,24 @@
-import socks
-import socket
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import os
 
-# Configurer PySocks pour utiliser le proxy SOCKS4
-socks.set_default_proxy(socks.SOCKS4, "162.19.7.48", 60113)
-socket.socket = socks.socksocket  # Redirige toutes les connexions via le proxy
-
-# Configurer Chrome pour le mode headless
+# Configurer les options Chrome
 chrome_options = Options()
-chrome_options.add_argument('--headless')  # Mode sans interface graphique (optionnel)
+chrome_options.add_argument('--headless')  # Mode sans interface graphique
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 
-print("Initialisation du driver Chrome...")
+# Chemin vers ChromeDriver (déployé par le buildpack)
+chrome_driver_path = "/app/.chromedriver/bin/chromedriver"  # Assurez-vous que c'est le bon chemin
 
-# Initialiser le WebDriver pour Chrome
-driver = webdriver.Chrome(options=chrome_options)
+# Initialisation du driver Chrome avec le bon service
+print("Initialisation du driver Chrome...")
+service = Service(executable_path=chrome_driver_path)
+driver = webdriver.Chrome(service=service, options=chrome_options)
 
 # URL de la page produit
 url = 'https://www.lesmalleiters.com/fr/chanel/petite-maroquinerie/chanel-wallet-on-chain-chanel-19-rose'
