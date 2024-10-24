@@ -8,13 +8,13 @@ chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
 
-# Chemin pour chrome et chromedriver installés par le buildpack
+# Chemins pour Chrome et Chromedriver
 chrome_bin = '/app/.apt/usr/bin/google-chrome'
 chromedriver_path = '/app/.chromedriver/bin/chromedriver'
 
 chrome_options.binary_location = chrome_bin
 
-# Utilisation de chromedriver
+# Utilisation du service pour chromedriver
 service = Service(chromedriver_path)
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
