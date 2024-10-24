@@ -2,25 +2,20 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 
-# Options pour Chrome
+# Configuration de Chrome options
 chrome_options = Options()
-chrome_options.add_argument('--headless')
-chrome_options.add_argument('--no-sandbox')
-chrome_options.add_argument('--disable-dev-shm-usage')
+chrome_options.add_argument("--headless")  # N'affiche pas l'interface
+chrome_options.add_argument("--disable-gpu")  # Pour éviter les problèmes liés à l'affichage graphique
+chrome_options.add_argument("--no-sandbox")  # Nécessaire pour Heroku
+chrome_options.add_argument("--disable-dev-shm-usage")  # Nécessaire pour éviter les erreurs de mémoire
 
-# Chemins pour Chrome et Chromedriver
-chrome_bin = '/app/.apt/usr/bin/google-chrome'
-chromedriver_path = '/app/.chromedriver/bin/chromedriver'
+# Chemin de chromedriver installé par le buildpack chrome-for-testing
+service = Service("/app/.chromedriver/bin/chromedriver")
 
-chrome_options.binary_location = chrome_bin
-
-# Utilisation du service pour chromedriver
-service = Service(chromedriver_path)
+# Initialisation du WebDriver
 driver = webdriver.Chrome(service=service, options=chrome_options)
 
-# Test - Aller sur un site
-url = 'https://www.lesmalleiters.com/fr/chanel/petite-maroquinerie/chanel-wallet-on-chain-chanel-19-rose'
-driver.get(url)
-
-print(driver.title)
+# Exemple d'utilisation du driver
+driver.get("https://www.lesmalleiters.com/fr/chanel/petite-maroquinerie/chanel-wallet-on-chain-chanel-19-rose")
+print(driver.page_source)  # Affiche le code source de la page
 driver.quit()
